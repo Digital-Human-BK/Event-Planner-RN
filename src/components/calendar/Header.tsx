@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 10,
     marginBottom: 30,
+    marginHorizontal: 25,
   },
   headerImage: {
     width: 40,

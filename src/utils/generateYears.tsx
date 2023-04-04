@@ -11,14 +11,6 @@ const currentYear = new Date();
 
 export const initialYears: YearItem[] = [
   {
-    id: subYears(currentYear, 4).toString(),
-    element: <Year year={subYears(currentYear, 4)} />,
-  },
-  {
-    id: subYears(currentYear, 3).toString(),
-    element: <Year year={subYears(currentYear, 3)} />,
-  },
-  {
     id: subYears(currentYear, 2).toString(),
     element: <Year year={subYears(currentYear, 2)} />,
   },
@@ -38,48 +30,10 @@ export const initialYears: YearItem[] = [
     id: addYears(currentYear, 2).toString(),
     element: <Year year={addYears(currentYear, 2)} />,
   },
-  {
-    id: addYears(currentYear, 3).toString(),
-    element: <Year year={addYears(currentYear, 3)} />,
-  },
-  {
-    id: addYears(currentYear, 4).toString(),
-    element: <Year year={addYears(currentYear, 4)} />,
-  },
 ];
-
-export const generatePreviousYearsAsync = (
-  firstYearValue: Date,
-): Promise<YearItem[]> => {
-  return new Promise(resolve => {
-    const prevYears = [
-      {
-        id: subYears(firstYearValue, 3).toString(),
-        element: <Year year={subYears(firstYearValue, 3)} />,
-      },
-      {
-        id: subYears(firstYearValue, 2).toString(),
-        element: <Year year={subYears(firstYearValue, 2)} />,
-      },
-      {
-        id: subYears(firstYearValue, 1).toString(),
-        element: <Year year={subYears(firstYearValue, 1)} />,
-      },
-    ];
-    resolve(prevYears);
-  });
-};
 
 export const generatePreviousYears = (firstYearValue: Date) => {
   return [
-    {
-      id: subYears(firstYearValue, 3).toString(),
-      element: <Year year={subYears(firstYearValue, 3)} />,
-    },
-    {
-      id: subYears(firstYearValue, 2).toString(),
-      element: <Year year={subYears(firstYearValue, 2)} />,
-    },
     {
       id: subYears(firstYearValue, 1).toString(),
       element: <Year year={subYears(firstYearValue, 1)} />,
@@ -96,10 +50,6 @@ export const generateNextYears = (lastYearValue: Date) => {
     {
       id: addYears(lastYearValue, 2).toString(),
       element: <Year year={addYears(lastYearValue, 2)} />,
-    },
-    {
-      id: addYears(lastYearValue, 3).toString(),
-      element: <Year year={addYears(lastYearValue, 3)} />,
     },
   ];
 };
