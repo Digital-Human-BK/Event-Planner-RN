@@ -39,7 +39,6 @@ const YearCalendar = () => {
   const [currentYearIndex, setCurrentYearIndex] = useState<number>(2);
   const [showSplash, setShowSplash] = useState<boolean>(true);
   const [yearsList, setYearsList] = useState<YearItem[]>(initialYears);
-  console.log(currentYearIndex);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -61,11 +60,6 @@ const YearCalendar = () => {
     const distanceFromEnd =
       contentSize.width - layoutMeasurement.width - contentOffset.x;
 
-    // const indexOfItem = Math.round(contentOffset.x / layoutMeasurement.width);
-    // setCurrentIndex(indexOfItem);
-
-    // console.log(indexOfItem);
-
     if (distanceFromEnd < 1) {
       // add more items to the end
       console.log('adding to end');
@@ -80,7 +74,7 @@ const YearCalendar = () => {
       const previousYears = generatePreviousYears(firstYearValue);
       setYearsList(currentData => [...previousYears, ...currentData]);
       setCurrentYearIndex(index => index + 1);
-      // scrollToIndex(3, false);
+      scrollToIndex(1, false);
     }
   };
 
@@ -89,8 +83,6 @@ const YearCalendar = () => {
   };
 
   const onViewableItemsChanged = useCallback(({ viewableItems }: any) => {
-    console.log(viewableItems);
-
     if (viewableItems.length > 0) {
       setYear(new Date(viewableItems[0].item.id).getFullYear());
     }
