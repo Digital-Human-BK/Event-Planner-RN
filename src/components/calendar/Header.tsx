@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -7,10 +7,9 @@ import { colors } from '../../theme/colors';
 
 type HeaderProps = {
   year: number;
-  onGoToCurrentYear: () => void;
 };
 
-const Header = ({ year, onGoToCurrentYear }: HeaderProps) => {
+const Header = ({ year }: HeaderProps) => {
   return (
     <View style={styles.header}>
       <View style={styles.headerImage}>
@@ -18,15 +17,13 @@ const Header = ({ year, onGoToCurrentYear }: HeaderProps) => {
       </View>
       <View style={styles.headerYearContainer}>
         <Text style={styles.headerYear}>{year}</Text>
-        <TouchableOpacity
-          style={styles.headerCalendar}
-          onPress={onGoToCurrentYear}>
+        <View style={styles.headerCalendar}>
           <MaterialCommunityIcons
             name="calendar-month"
             size={25}
             color={colors.secondary}
           />
-        </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -40,7 +37,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginTop: 10,
-    marginBottom: 30,
+    marginBottom: 20,
     marginHorizontal: 25,
   },
   headerImage: {
