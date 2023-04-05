@@ -1,7 +1,7 @@
-import YearView from './src/screens/YearView';
+import YearCalendar from './src/screens/YearCalendar';
 
 const App = () => {
-  return <YearView />;
+  return <YearCalendar />;
 };
 
 export default App;

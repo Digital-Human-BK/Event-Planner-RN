@@ -1,4 +1,3 @@
-import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -36,8 +35,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 10,
-    marginBottom: 20,
+    marginTop: 20,
     marginHorizontal: 25,
   },
   headerImage: {

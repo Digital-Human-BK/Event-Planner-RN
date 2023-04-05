@@ -1,10 +1,11 @@
-import { View, Text, Dimensions } from 'react-native';
+import { View, Text, useWindowDimensions } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 import { colors } from '../../theme/colors';
-const { width } = Dimensions.get('window');
 
 const Events = () => {
+  const { width } = useWindowDimensions();
+
   return (
     <View
       style={{
