@@ -1,3 +1,5 @@
+export const currentYear = new Date().getFullYear();
+
 export const MONTHS_PER_ROW = 3;
 
 export const MONTHS_PER_YEAR = 12;
@@ -17,15 +19,4 @@ export const MONTH_NAMES = [
   'October',
   'November',
   'December',
-];
-
-export const currentYear = new Date().getFullYear();
-
-export const yearsList = [
-  currentYear - 2,
-  currentYear - 1,
-  currentYear,
-  currentYear + 1,
-  currentYear + 2,
-  currentYear + 3,
 ];

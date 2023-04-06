@@ -11,7 +11,7 @@ import { colors } from '../../theme/colors';
 const Year = ({ yearProp }: { yearProp: number }) => {
   const { width } = useWindowDimensions();
 
-  const weeksInMonth = (month: any, year: any) => {
+  const weeksInMonth = (month: number, year: number) => {
     const lastDayOfMonth = new Date(year, month + 1, 0);
     const daysInMonth = lastDayOfMonth.getDate();
     const daysInWeek = DAYS_PER_WEEK;
@@ -44,8 +44,9 @@ const Year = ({ yearProp }: { yearProp: number }) => {
                 key={`${year}-${month}-${day}`}
                 style={{
                   flex: 1,
-                  height: 20,
+                  height: 24,
                   textAlign: 'center',
+                  fontWeight: '500',
                   fontSize: 10,
                   color: colors.primary,
                 }}>
@@ -85,7 +86,6 @@ const Year = ({ yearProp }: { yearProp: number }) => {
         key={i}
         style={{
           flexDirection: 'row',
-          flex: 1,
           columnGap: 20,
           justifyContent: 'center',
         }}>
@@ -95,7 +95,13 @@ const Year = ({ yearProp }: { yearProp: number }) => {
   }
 
   return (
-    <View style={{ flex: 1, width: width, marginBottom: 20 }}>{months}</View>
+    <View
+      style={{
+        width: width,
+        marginBottom: 20,
+      }}>
+      {months}
+    </View>
   );
 };
 
