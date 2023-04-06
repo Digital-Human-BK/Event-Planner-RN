@@ -44,7 +44,7 @@ const Year = ({ yearProp }: { yearProp: number }) => {
                 key={`${year}-${month}-${day}`}
                 style={{
                   flex: 1,
-                  height: 24,
+                  height: 22,
                   textAlign: 'center',
                   fontWeight: '500',
                   fontSize: 10,
