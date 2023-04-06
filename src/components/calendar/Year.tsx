@@ -1,4 +1,9 @@
-import { View, Text, useWindowDimensions } from 'react-native';
+import {
+  View,
+  Text,
+  useWindowDimensions,
+  TouchableWithoutFeedback,
+} from 'react-native';
 
 import {
   MONTH_NAMES,
@@ -7,6 +12,10 @@ import {
   DAYS_PER_WEEK,
 } from '../../constants/calendar';
 import { colors } from '../../theme/colors';
+import { EVENTS } from '../../utils/events';
+import { formatToEventDate } from '../../utils/dateFormat';
+
+import EventDot from './EventDot';
 
 const Year = ({ yearProp }: { yearProp: number }) => {
   const { width } = useWindowDimensions();
@@ -38,20 +47,33 @@ const Year = ({ yearProp }: { yearProp: number }) => {
         for (let d = 0; d < DAYS_PER_WEEK; d++) {
           const day = w * DAYS_PER_WEEK + d - new Date(year, month, 1).getDay();
           if (day >= 0 && day < new Date(year, month + 1, 0).getDate()) {
+            const date = formatToEventDate(year, month, day);
+            const hasEvent = Boolean(EVENTS[date]);
             week.push(
               // single day
-              <Text
-                key={`${year}-${month}-${day}`}
+              <View
+                key={date}
                 style={{
                   flex: 1,
                   height: 22,
-                  textAlign: 'center',
-                  fontWeight: '500',
-                  fontSize: 10,
-                  color: colors.primary,
+                  alignItems: 'center',
+                  justifyContent: 'flex-start',
                 }}>
-                {day + 1}
-              </Text>,
+                <Text
+                  style={[
+                    {
+                      textAlign: 'center',
+                      fontSize: 10,
+                    },
+                    {
+                      color: hasEvent ? colors.highlightEvent : colors.primary,
+                      fontWeight: hasEvent ? '700' : '500',
+                    },
+                  ]}>
+                  {day + 1}
+                </Text>
+                {hasEvent && <EventDot size={4} />}
+              </View>,
             );
           } else {
             // empty day
@@ -61,24 +83,30 @@ const Year = ({ yearProp }: { yearProp: number }) => {
           }
         }
         days.push(
-          <View key={w} style={{ flexDirection: 'row', width: width / 3 - 30 }}>
+          <View key={w} style={{ flexDirection: 'row' }}>
             {week}
           </View>,
         );
       }
       row.push(
-        <View key={`${year}-${month}`} style={{ marginBottom: 5 }}>
-          <Text
-            style={{
-              textAlign: 'left',
-              fontWeight: 'bold',
-              marginBottom: 5,
-              color: colors.primary,
-            }}>
-            {MONTH_NAMES[month]}
-          </Text>
-          {days}
-        </View>,
+        <TouchableWithoutFeedback
+          onPress={() => console.log(formatToEventDate(year, month))}
+          key={`${year}-${month}`}
+          style={{ marginBottom: 5 }}>
+          <View style={{ width: width / 3 - 30 }}>
+            <Text
+              style={{
+                fontSize: 14,
+                textAlign: 'left',
+                fontWeight: 'bold',
+                marginBottom: 5,
+                color: colors.primary,
+              }}>
+              {MONTH_NAMES[month]}
+            </Text>
+            {days}
+          </View>
+        </TouchableWithoutFeedback>,
       );
     }
     months.push(
