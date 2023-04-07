@@ -1,12 +1,13 @@
 import { useRef, useState, useCallback } from 'react';
 import { View, FlatList, useWindowDimensions } from 'react-native';
 
+import { colors } from '../theme/colors';
+import { currentYear } from '../constants/calendar';
+
 import Header from '../components/calendar/Header';
 import InitialYears from '../components/calendar/InitialYears';
 
-import { currentYear } from '../constants/calendar';
-
-const YearCalendar = () => {
+const Calendar = () => {
   const { width } = useWindowDimensions();
   const [year, setYear] = useState(currentYear);
 
@@ -23,7 +24,7 @@ const YearCalendar = () => {
   const viewConfigRef = useRef({ viewAreaCoveragePercentThreshold: 60 });
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, backgroundColor: colors.secondary }}>
       <Header year={year} />
       <FlatList
         contentContainerStyle={{ paddingVertical: 30 }}
@@ -50,4 +51,4 @@ const YearCalendar = () => {
   );
 };
 
-export default YearCalendar;
+export default Calendar;
