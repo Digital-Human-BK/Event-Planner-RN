@@ -1,6 +1,7 @@
 import { useRef, useState, useCallback } from 'react';
-import { View, FlatList, useWindowDimensions } from 'react-native';
+import { View, FlatList } from 'react-native';
 
+import { width } from '../constants/ui';
 import { colors } from '../theme/colors';
 import { currentYear } from '../constants/calendar';
 
@@ -8,7 +9,6 @@ import Header from '../components/calendar/Header';
 import InitialYears from '../components/calendar/InitialYears';
 
 const Calendar = () => {
-  const { width } = useWindowDimensions();
   const [year, setYear] = useState(currentYear);
 
   const renderItem = useCallback(({ item }: { item: any }) => {
@@ -27,7 +27,7 @@ const Calendar = () => {
     <View style={{ flex: 1, backgroundColor: colors.secondary }}>
       <Header year={year} />
       <FlatList
-        contentContainerStyle={{ paddingVertical: 30 }}
+        contentContainerStyle={{ paddingVertical: 20 }}
         data={InitialYears}
         renderItem={renderItem}
         keyExtractor={item => item.id.toString()}

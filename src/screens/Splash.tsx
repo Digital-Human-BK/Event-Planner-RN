@@ -1,7 +1,7 @@
-import { Dimensions, Image, StyleSheet, View } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
 import { colors } from '../theme/colors';
 
-const { width } = Dimensions.get('window');
+import { width } from '../constants/ui';
 
 const Splash = () => {
   return (
