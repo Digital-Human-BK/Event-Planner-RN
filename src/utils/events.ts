@@ -7,6 +7,7 @@ export const EVENTS: EVENTS_TYPE = {
   '2022-05-27': { marked: true, dotColor: 'green' },
   '2022-07-01': { marked: true, dotColor: 'green' },
   '2022-08-24': { marked: true, dotColor: 'green' },
+  '2022-11-03': { marked: true, dotColor: 'green' },
   '2023-01-01': { marked: true, dotColor: 'green' },
   '2023-02-02': { marked: true, dotColor: 'green' },
   '2023-03-03': { marked: true, dotColor: 'green' },

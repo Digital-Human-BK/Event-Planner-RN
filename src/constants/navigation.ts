@@ -4,7 +4,7 @@ type IconsType = {
 
 export const Icons: IconsType = {
   Calendar: 'calendar-month',
-  Values: 'emoticon-wink',
+  Values: 'alpha-v-circle',
   Messages: 'facebook-messenger',
   Progress: 'progress-check',
 };
