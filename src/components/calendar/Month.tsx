@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet } from 'react-native';
 
 import {
+  format,
   getDate,
   getTime,
   getMonth,
@@ -15,7 +16,6 @@ import {
 import { width } from '../../constants/ui';
 import { colors } from '../../theme/colors';
 import { EVENTS } from '../../utils/events';
-import { formatToEventDate } from '../../utils/dateFormat';
 
 import EventDot from './EventDot';
 
@@ -40,7 +40,7 @@ const Month = ({ month }: { month: Date }) => {
 
       // Only render the day if it belongs to the current month
       if (getMonth(day) === getMonth(month)) {
-        const date = formatToEventDate(day);
+        const date = format(day, 'yyyy-MM-dd');
         const dayIsHavingEvents = Boolean(EVENTS[date]);
         renderedDays.push(
           <View key={getTime(day)} style={styles.dayView}>
