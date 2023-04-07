@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { colors } from './src/theme/colors';
+import { Icons } from './src/constants/navigation';
 
 import Splash from './src/screens/Splash';
 import Values from './src/screens/Values';
@@ -14,17 +15,6 @@ import Progress from './src/screens/Progress';
 import Calendar from './src/screens/Calendar';
 
 const Tab = createBottomTabNavigator();
-
-type IconsType = {
-  [key: string]: string;
-};
-
-const Icons: IconsType = {
-  Calendar: 'calendar-month',
-  Values: 'emoticon-wink',
-  Messages: 'facebook-messenger',
-  Progress: 'progress-check',
-};
 
 const App = () => {
   const [showSplash, setShowSplash] = useState(true);

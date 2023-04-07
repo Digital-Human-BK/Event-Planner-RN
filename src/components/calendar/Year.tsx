@@ -91,9 +91,8 @@ const Year = ({ yearProp }: { yearProp: number }) => {
       row.push(
         <TouchableWithoutFeedback
           onPress={() => console.log(formatToEventDate(year, month))}
-          key={`${year}-${month}`}
-          style={{ marginBottom: 5 }}>
-          <View style={{ width: width / 3 - 30 }}>
+          key={`${year}-${month}`}>
+          <View style={{ width: width / 3 - 30, marginBottom: 10 }}>
             <Text
               style={{
                 fontSize: 14,
