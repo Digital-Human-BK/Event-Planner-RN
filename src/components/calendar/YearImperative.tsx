@@ -1,4 +1,4 @@
-import { View, Text, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, TouchableWithoutFeedback, StyleSheet } from 'react-native';
 
 import {
   MONTH_NAMES,
@@ -10,7 +10,7 @@ import {
 import { width } from '../../constants/ui';
 import { colors } from '../../theme/colors';
 import { EVENTS } from '../../utils/events';
-import { formatToEventDate } from '../../utils/dateFormat';
+// import { formatToEventDate } from '../../utils/dateFormat';
 
 import EventDot from './EventDot';
 
@@ -42,24 +42,15 @@ const Year = ({ yearProp }: { yearProp: number }) => {
         for (let d = 0; d < DAYS_PER_WEEK; d++) {
           const day = w * DAYS_PER_WEEK + d - new Date(year, month, 1).getDay();
           if (day >= 0 && day < new Date(year, month + 1, 0).getDate()) {
-            const date = formatToEventDate(year, month, day);
+            // const date = formatToEventDate(year, month, day);
+            const date = '2023-01-01';
             const hasEvent = Boolean(EVENTS[date]);
             week.push(
               // single day
-              <View
-                key={date}
-                style={{
-                  flex: 1,
-                  height: 22,
-                  alignItems: 'center',
-                  justifyContent: 'flex-start',
-                }}>
+              <View key={date} style={styles.dayContainer}>
                 <Text
                   style={[
-                    {
-                      textAlign: 'center',
-                      fontSize: 10,
-                    },
+                    styles.dayText,
                     {
                       color: hasEvent ? colors.highlightEvent : colors.primary,
                       fontWeight: hasEvent ? '700' : '500',
@@ -73,58 +64,74 @@ const Year = ({ yearProp }: { yearProp: number }) => {
           } else {
             // empty day
             week.push(
-              <View key={`${year}-${month}-${day}`} style={{ flex: 1 }} />,
+              <View key={`${year}-${month}-${day}`} style={styles.emptyDay} />,
             );
           }
         }
         days.push(
-          <View key={w} style={{ flexDirection: 'row' }}>
+          <View key={w} style={styles.weekContainer}>
             {week}
           </View>,
         );
       }
       row.push(
         <TouchableWithoutFeedback
-          onPress={() => console.log(formatToEventDate(year, month))}
+          // onPress={() => console.log(formatToEventDate(year, month))}
           key={`${year}-${month}`}>
-          <View style={{ width: width / 3 - 30, marginBottom: 10 }}>
-            <Text
-              style={{
-                fontSize: 14,
-                textAlign: 'left',
-                fontWeight: 'bold',
-                marginBottom: 5,
-                color: colors.primary,
-              }}>
-              {MONTH_NAMES[month]}
-            </Text>
+          <View style={styles.monthContainer}>
+            <Text style={styles.monthLabel}>{MONTH_NAMES[month]}</Text>
             {days}
           </View>
         </TouchableWithoutFeedback>,
       );
     }
     months.push(
-      <View
-        key={i}
-        style={{
-          flexDirection: 'row',
-          columnGap: 20,
-          justifyContent: 'center',
-        }}>
+      <View key={i} style={styles.monthsWrapper}>
         {row}
       </View>,
     );
   }
 
-  return (
-    <View
-      style={{
-        width: width,
-        marginBottom: 20,
-      }}>
-      {months}
-    </View>
-  );
+  return <View style={styles.container}>{months}</View>;
 };
 
 export default Year;
+
+const styles = StyleSheet.create({
+  container: {
+    width: width,
+    marginBottom: 20,
+  },
+  dayContainer: {
+    flex: 1,
+    height: 22,
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+  },
+  dayText: {
+    textAlign: 'center',
+    fontSize: 10,
+  },
+  emptyDay: {
+    flex: 1,
+  },
+  weekContainer: {
+    flexDirection: 'row',
+  },
+  monthContainer: {
+    width: width / 3 - 30,
+    marginBottom: 10,
+  },
+  monthLabel: {
+    fontSize: 14,
+    textAlign: 'left',
+    fontWeight: 'bold',
+    marginBottom: 5,
+    color: colors.primary,
+  },
+  monthsWrapper: {
+    flexDirection: 'row',
+    columnGap: 20,
+    justifyContent: 'center',
+  },
+});

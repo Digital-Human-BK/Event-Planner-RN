@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { StatusBar } from 'react-native';
+import { StatusBar, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -39,30 +39,15 @@ const App = () => {
             headerShown: false,
             tabBarActiveTintColor: colors.highlightEvent,
             tabBarInactiveTintColor: colors.primary,
-            tabBarIcon: ({ color }) => {
-              return (
-                <MaterialCommunityIcons
-                  name={Icons[route.name]}
-                  color={color}
-                  size={40}
-                />
-              );
-            },
-            tabBarLabelStyle: {
-              fontSize: 14,
-            },
-            tabBarStyle: {
-              elevation: 0, // for Android
-              shadowOffset: {
-                width: 0,
-                height: 0, // for iOS
-              },
-              height: 100,
-              borderTopWidth: 2,
-              borderTopColor: colors.primary,
-              paddingTop: 10,
-              paddingBottom: 25,
-            },
+            tabBarIcon: ({ color }) => (
+              <MaterialCommunityIcons
+                name={Icons[route.name]}
+                color={color}
+                size={40}
+              />
+            ),
+            tabBarLabelStyle: styles.tabBarLabelStyle,
+            tabBarStyle: styles.tabBarStyle,
           })}>
           <Tab.Screen name="Calendar" component={Calendar} />
           <Tab.Screen name="Values" component={Values} />
@@ -75,3 +60,21 @@ const App = () => {
 };
 
 export default App;
+
+const styles = StyleSheet.create({
+  tabBarLabelStyle: {
+    fontSize: 14,
+  },
+  tabBarStyle: {
+    elevation: 0, // for Android
+    shadowOffset: {
+      width: 0,
+      height: 0, // for iOS
+    },
+    height: 100,
+    borderTopWidth: 2,
+    borderTopColor: colors.primary,
+    paddingTop: 10,
+    paddingBottom: 25,
+  },
+});

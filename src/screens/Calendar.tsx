@@ -1,5 +1,5 @@
 import { useRef, useState, useCallback } from 'react';
-import { View, FlatList } from 'react-native';
+import { View, FlatList, StyleSheet } from 'react-native';
 
 import { width } from '../constants/ui';
 import { colors } from '../theme/colors';
@@ -24,7 +24,7 @@ const Calendar = () => {
   const viewConfigRef = useRef({ viewAreaCoveragePercentThreshold: 60 });
 
   return (
-    <View style={{ flex: 1, backgroundColor: colors.secondary }}>
+    <View style={styles.container}>
       <Header year={year} />
       <FlatList
         contentContainerStyle={{ paddingVertical: 20 }}
@@ -52,3 +52,10 @@ const Calendar = () => {
 };
 
 export default Calendar;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.secondary,
+  },
+});

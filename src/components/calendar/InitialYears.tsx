@@ -1,7 +1,12 @@
 import Year from './Year';
 import { currentYear } from '../../constants/calendar';
 
-const InitialYears = [
+type YearType = {
+  id: number | string;
+  element: JSX.Element;
+};
+
+const InitialYears: YearType[] = [
   {
     id: currentYear - 2,
     element: <Year yearProp={currentYear - 2} />,
