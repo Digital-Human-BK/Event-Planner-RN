@@ -2,8 +2,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Month from './Month';
 import Calendar from './Calendar';
+import { RootStackParamList } from '../../interfaces/navigation';
 
-const CalendarStack = createNativeStackNavigator();
+const CalendarStack = createNativeStackNavigator<RootStackParamList>();
 
 const CalendarStackScreen = () => {
   return (

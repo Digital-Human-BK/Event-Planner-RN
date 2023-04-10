@@ -5,15 +5,16 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { colors } from '../../theme/colors';
 import { format } from 'date-fns';
 import { width } from '../../constants/ui';
+import { useNavigation } from '@react-navigation/native';
 
 type MonthHeaderProps = {
   date: Date;
   onPressLeft: () => void;
-  onPressRight: () => void;
 };
 
-const MonthHeader = ({ date, onPressLeft, onPressRight }: MonthHeaderProps) => {
+const MonthHeader = ({ date, onPressLeft }: MonthHeaderProps) => {
   const currentDate = new Date(date);
+  const navigation = useNavigation();
   return (
     <View style={styles.headerContainer}>
       <View style={styles.headerImage}>
@@ -32,7 +33,7 @@ const MonthHeader = ({ date, onPressLeft, onPressRight }: MonthHeaderProps) => {
           name="calendar-month"
           size={24}
           color={colors.primary}
-          onPress={onPressRight}
+          onPress={() => navigation.goBack()}
         />
       </View>
     </View>

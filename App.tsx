@@ -67,6 +67,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   tabBarStyle: {
+    backgroundColor: colors.primaryTabBar,
     elevation: 0, // for Android
     shadowOffset: {
       width: 0,

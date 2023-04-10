@@ -1,4 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { View, Text, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 
 import {
@@ -17,11 +18,14 @@ import {
 import { width } from '../../constants/ui';
 import { colors } from '../../theme/colors';
 import { EVENTS } from '../../utils/events';
+import { RootStackParamList } from '../../interfaces/navigation';
 
 import EventDot from './EventDot';
 
 const Month = ({ month }: { month: Date }) => {
-  const navigation = useNavigation();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
   const weeks = eachWeekOfInterval({
     start: startOfMonth(month),
     end: endOfMonth(month),
