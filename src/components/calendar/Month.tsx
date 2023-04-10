@@ -1,4 +1,5 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { View, Text, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 
 import {
   format,
@@ -20,6 +21,7 @@ import { EVENTS } from '../../utils/events';
 import EventDot from './EventDot';
 
 const Month = ({ month }: { month: Date }) => {
+  const navigation = useNavigation();
   const weeks = eachWeekOfInterval({
     start: startOfMonth(month),
     end: endOfMonth(month),
@@ -71,12 +73,17 @@ const Month = ({ month }: { month: Date }) => {
   }
 
   return (
-    <View style={styles.monthView}>
-      <Text style={styles.monthTitle}>
-        {month.toLocaleString('default', { month: 'long' })}
-      </Text>
-      {renderedWeeks}
-    </View>
+    <TouchableWithoutFeedback
+      onPress={() =>
+        navigation.navigate('Month', { id: format(month, 'yyyy-MM-dd') })
+      }>
+      <View style={styles.monthView}>
+        <Text style={styles.monthTitle}>
+          {month.toLocaleString('default', { month: 'long' })}
+        </Text>
+        {renderedWeeks}
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 

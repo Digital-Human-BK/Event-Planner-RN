@@ -1,3 +1,4 @@
+// THIS COMPONENT IS NOT BEING USED
 import { View, Text, TouchableWithoutFeedback, StyleSheet } from 'react-native';
 
 import {

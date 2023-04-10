@@ -1,21 +1,29 @@
 import { useRef, useState, useCallback } from 'react';
-import { View, FlatList, StyleSheet } from 'react-native';
+import { View, FlatList, StyleSheet, ViewToken } from 'react-native';
 
-import { width } from '../constants/ui';
-import { colors } from '../theme/colors';
-import { currentYear } from '../constants/calendar';
+import { width } from '../../constants/ui';
+import { colors } from '../../theme/colors';
+import { currentYear } from '../../constants/calendar';
 
-import Header from '../components/calendar/Header';
-import InitialYears from '../components/calendar/InitialYears';
+import Header from '../../components/calendar/Header';
+import InitialYears from '../../components/calendar/InitialYears';
+
+type ViewableItems = {
+  viewableItems: ViewToken[];
+  changed: ViewToken[];
+};
 
 const Calendar = () => {
   const [year, setYear] = useState(currentYear);
 
-  const renderItem = useCallback(({ item }: { item: any }) => {
-    return item.element;
-  }, []);
+  const renderItem = useCallback(
+    ({ item }: { item: { id: number | string; element: JSX.Element } }) => {
+      return item.element;
+    },
+    [],
+  );
 
-  const onViewChanged = useRef(({ changed }: any) => {
+  const onViewChanged = useRef(({ changed }: ViewableItems) => {
     if (changed[0].isViewable) {
       setYear(changed[0].item.id);
     }
