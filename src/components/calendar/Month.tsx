@@ -17,7 +17,7 @@ import {
 
 import { width } from '../../constants/ui';
 import { colors } from '../../theme/colors';
-import { EVENTS } from '../../utils/events';
+import { MARKED_EVENTS } from '../../utils/events';
 import { RootStackParamList } from '../../interfaces/navigation';
 
 import EventDot from './EventDot';
@@ -47,7 +47,7 @@ const Month = ({ month }: { month: Date }) => {
       // Only render the day if it belongs to the current month
       if (getMonth(day) === getMonth(month)) {
         const date = format(day, 'yyyy-MM-dd');
-        const dayIsHavingEvents = Boolean(EVENTS[date]);
+        const dayIsHavingEvents = Boolean(MARKED_EVENTS[date]);
         renderedDays.push(
           <View key={getTime(day)} style={styles.dayView}>
             <Text
@@ -79,7 +79,7 @@ const Month = ({ month }: { month: Date }) => {
   return (
     <TouchableWithoutFeedback
       onPress={() =>
-        navigation.navigate('Month', { id: format(month, 'yyyy-MM-dd') })
+        navigation.navigate('Month', { monthId: format(month, 'yyyy-MM-dd') })
       }>
       <View style={styles.monthView}>
         <Text style={styles.monthTitle}>

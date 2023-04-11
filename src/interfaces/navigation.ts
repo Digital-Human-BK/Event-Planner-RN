@@ -1,4 +1,8 @@
 export type RootStackParamList = {
   Year: undefined;
-  Month: { id: string };
+  Month: { monthId: string };
+};
+
+export type IconsType = {
+  [key: string]: string;
 };

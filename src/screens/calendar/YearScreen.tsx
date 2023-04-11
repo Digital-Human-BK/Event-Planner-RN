@@ -13,7 +13,7 @@ type ViewableItems = {
   changed: ViewToken[];
 };
 
-const Calendar = () => {
+const YearScreen = () => {
   const [year, setYear] = useState(currentYear);
 
   const renderItem = useCallback(
@@ -59,7 +59,7 @@ const Calendar = () => {
   );
 };
 
-export default Calendar;
+export default YearScreen;
 
 const styles = StyleSheet.create({
   container: {

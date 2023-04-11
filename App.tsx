@@ -11,7 +11,6 @@ import { Icons } from './src/constants/navigation';
 import Values from './src/screens/Values';
 import Messages from './src/screens/Messages';
 import Progress from './src/screens/Progress';
-// import Calendar from './src/screens/calendar/Calendar';
 import Splash from './src/components/UI/Splash';
 import CalendarStackScreen from './src/screens/calendar';
 

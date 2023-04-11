@@ -1,6 +1,4 @@
-type IconsType = {
-  [key: string]: string;
-};
+import { IconsType } from '../interfaces/navigation';
 
 export const Icons: IconsType = {
   Calendar: 'calendar-month',
