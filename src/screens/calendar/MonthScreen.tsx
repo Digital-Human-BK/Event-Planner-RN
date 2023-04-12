@@ -1,11 +1,13 @@
-import { useCallback, useMemo, useState } from 'react';
 import { format } from 'date-fns';
+import { useMemo, useState } from 'react';
 import { ScrollView } from 'react-native';
+import { RouteProp } from '@react-navigation/native';
 import { CalendarList, DateData, LocaleConfig } from 'react-native-calendars';
 
 import { colors } from '../../theme/colors';
 import { theme } from '../../theme/calendar';
 import { MARKED_EVENTS } from '../../utils/events';
+import { RootStackParamList } from '../../interfaces/navigation';
 
 import MonthHeader from '../../components/calendar/MonthHeader';
 import EventsList from '../../components/calendar/EventsList';
@@ -53,7 +55,22 @@ LocaleConfig.locales.en = {
 
 LocaleConfig.defaultLocale = 'en';
 
-const MonthScreen = ({ route }: any) => {
+const debounce = (func: (arg: DateData[]) => void, delay: number) => {
+  let timeoutId: ReturnType<typeof setTimeout>;
+  return (month: DateData[]) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      func(month);
+    }, delay);
+  };
+};
+
+type MonthScreenProps = {
+  // navigation: StackNavigationProp<RootStackParamList, 'Home'>;
+  route: RouteProp<RootStackParamList, 'Month'>;
+};
+
+const MonthScreen = ({ route }: MonthScreenProps) => {
   const initialDate = route.params.monthId;
   const [currentDate, setCurrentDate] = useState(initialDate);
 
@@ -71,9 +88,9 @@ const MonthScreen = ({ route }: any) => {
     // implement logic for left button press
   };
 
-  const handleMonthChange = useCallback((month: DateData) => {
-    setCurrentDate(month.dateString);
-  }, []);
+  const handleMonthChange = debounce((month: DateData[]) => {
+    setCurrentDate(month[0].dateString);
+  }, 20);
 
   return (
     <ScrollView
@@ -92,7 +109,7 @@ const MonthScreen = ({ route }: any) => {
         calendarHeight={430}
         pastScrollRange={24}
         futureScrollRange={24}
-        onMonthChange={handleMonthChange}
+        onVisibleMonthsChange={handleMonthChange}
         markedDates={markedEvents}
         renderHeader={date => (
           <MonthHeader date={date} onPressLeft={onLeftPress} />
