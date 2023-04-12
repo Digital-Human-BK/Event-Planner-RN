@@ -8,10 +8,10 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { colors } from './src/theme/colors';
 import { Icons } from './src/constants/navigation';
 
-import Values from './src/screens/Values';
-import Messages from './src/screens/Messages';
-import Progress from './src/screens/Progress';
 import Splash from './src/components/UI/Splash';
+import Values from './src/screens/values/Values';
+import Messages from './src/screens/messages/Messages';
+import Progress from './src/screens/progress/Progress';
 import CalendarStackScreen from './src/screens/calendar';
 
 const Tab = createBottomTabNavigator();
