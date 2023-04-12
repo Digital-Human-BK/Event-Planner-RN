@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   imageContainer: {
-    height: 150,
+    height: 140,
     backgroundColor: '#d5f4ff',
     alignItems: 'center',
     justifyContent: 'center',

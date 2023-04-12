@@ -1,4 +1,3 @@
-import { format } from 'date-fns';
 import { useMemo, useState } from 'react';
 import { ScrollView } from 'react-native';
 import { RouteProp } from '@react-navigation/native';
@@ -6,6 +5,7 @@ import { CalendarList, DateData, LocaleConfig } from 'react-native-calendars';
 
 import { colors } from '../../theme/colors';
 import { theme } from '../../theme/calendar';
+import { today } from '../../constants/calendar';
 import { MARKED_EVENTS } from '../../utils/events';
 import { RootStackParamList } from '../../interfaces/navigation';
 
@@ -77,7 +77,7 @@ const MonthScreen = ({ route }: MonthScreenProps) => {
   const markedEvents = useMemo(() => {
     return {
       ...MARKED_EVENTS,
-      [format(new Date(), 'yyyy-MM-dd')]: {
+      [today]: {
         selected: true,
         selectedColor: colors.primary,
       },

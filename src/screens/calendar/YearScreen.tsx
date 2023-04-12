@@ -1,9 +1,11 @@
-import { useRef, useState, useCallback } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { useRef, useState, useCallback, useEffect } from 'react';
 import { View, FlatList, StyleSheet, ViewToken } from 'react-native';
 
 import { width } from '../../constants/ui';
 import { colors } from '../../theme/colors';
-import { currentYear } from '../../constants/calendar';
+import { currentYear, today } from '../../constants/calendar';
+import { StackNavigationProps } from '../../interfaces/navigation';
 
 import Header from '../../components/calendar/Header';
 import InitialYears from '../../components/calendar/InitialYears';
@@ -14,6 +16,7 @@ type ViewableItems = {
 };
 
 const YearScreen = () => {
+  const navigation = useNavigation<StackNavigationProps['navigation']>();
   const [year, setYear] = useState(currentYear);
 
   const renderItem = useCallback(
@@ -30,6 +33,10 @@ const YearScreen = () => {
   });
 
   const viewConfigRef = useRef({ viewAreaCoveragePercentThreshold: 60 });
+
+  useEffect(() => {
+    navigation.navigate('Month', { monthId: today });
+  }, [navigation]);
 
   return (
     <View style={styles.container}>

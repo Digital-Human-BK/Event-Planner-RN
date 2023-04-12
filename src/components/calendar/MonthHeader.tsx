@@ -6,6 +6,7 @@ import { colors } from '../../theme/colors';
 import { format } from 'date-fns';
 import { width } from '../../constants/ui';
 import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProps } from '../../interfaces/navigation';
 
 type MonthHeaderProps = {
   date: Date;
@@ -14,7 +15,7 @@ type MonthHeaderProps = {
 
 const MonthHeader = ({ date, onPressLeft }: MonthHeaderProps) => {
   const currentDate = new Date(date);
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigationProps['navigation']>();
   return (
     <View style={styles.headerContainer}>
       <View style={styles.headerImage}>
