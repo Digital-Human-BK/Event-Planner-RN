@@ -1,35 +1,41 @@
+import { format } from 'date-fns';
 import { View, Text, StyleSheet } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 import { width } from '../../constants/ui';
 import { colors } from '../../theme/colors';
 
-const Events = () => {
+type EventsProps = {
+  title: string;
+  description: string;
+  timestamp: number;
+};
+
+const EventItem = ({ title, description, timestamp }: EventsProps) => {
+  const date = new Date(timestamp);
+  const formattedDate = format(date, "dd MMM yyyy 'at' HH:mm 'UTC+2'");
+
   return (
     <View style={styles.container}>
       <View style={styles.contentWrapper}>
-        <Text style={styles.dateText}>05 JAN AT 11:00 UTC+02</Text>
+        <Text style={styles.dateText}>{formattedDate}</Text>
         <View style={styles.imageContainer}>
           <FontAwesome name="image" size={40} color={colors.primary} />
         </View>
-        <Text style={styles.eventTitle}>Growth Summit</Text>
-        <Text style={styles.eventText}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
-          nulla qui dolorem id possimus laboriosam commodi voluptates unde ipsa
-          nam animi magnam eius illo, hic consequuntur, libero molestias placeat
-          quod.
-        </Text>
+        <Text style={styles.eventTitle}>{title}</Text>
+        <Text style={styles.eventText}>{description}</Text>
       </View>
     </View>
   );
 };
 
-export default Events;
+export default EventItem;
 
 const styles = StyleSheet.create({
   container: {
     width: width,
     paddingHorizontal: 25,
+    marginTop: 20,
   },
   contentWrapper: {
     borderWidth: 2,
@@ -44,7 +50,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   imageContainer: {
-    height: 150,
+    height: 140,
     backgroundColor: '#d5f4ff',
     alignItems: 'center',
     justifyContent: 'center',

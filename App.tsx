@@ -8,11 +8,11 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { colors } from './src/theme/colors';
 import { Icons } from './src/constants/navigation';
 
-import Splash from './src/screens/Splash';
-import Values from './src/screens/Values';
-import Messages from './src/screens/Messages';
-import Progress from './src/screens/Progress';
-import Calendar from './src/screens/Calendar';
+import Splash from './src/components/UI/Splash';
+import Values from './src/screens/values/Values';
+import Messages from './src/screens/messages/Messages';
+import Progress from './src/screens/progress/Progress';
+import CalendarStackScreen from './src/screens/calendar';
 
 const Tab = createBottomTabNavigator();
 
@@ -49,7 +49,7 @@ const App = () => {
             tabBarLabelStyle: styles.tabBarLabelStyle,
             tabBarStyle: styles.tabBarStyle,
           })}>
-          <Tab.Screen name="Calendar" component={Calendar} />
+          <Tab.Screen name="Calendar" component={CalendarStackScreen} />
           <Tab.Screen name="Values" component={Values} />
           <Tab.Screen name="Messages" component={Messages} />
           <Tab.Screen name="Progress" component={Progress} />
@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   tabBarStyle: {
+    backgroundColor: colors.primaryTabBar,
     elevation: 0, // for Android
     shadowOffset: {
       width: 0,

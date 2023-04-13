@@ -1,4 +1,5 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { View, Text, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 
 import {
   format,
@@ -15,11 +16,14 @@ import {
 
 import { width } from '../../constants/ui';
 import { colors } from '../../theme/colors';
-import { EVENTS } from '../../utils/events';
+import { MARKED_EVENTS } from '../../utils/events';
+import { StackNavigationProps } from '../../interfaces/navigation';
 
 import EventDot from './EventDot';
 
 const Month = ({ month }: { month: Date }) => {
+  const navigation = useNavigation<StackNavigationProps['navigation']>();
+
   const weeks = eachWeekOfInterval({
     start: startOfMonth(month),
     end: endOfMonth(month),
@@ -41,7 +45,7 @@ const Month = ({ month }: { month: Date }) => {
       // Only render the day if it belongs to the current month
       if (getMonth(day) === getMonth(month)) {
         const date = format(day, 'yyyy-MM-dd');
-        const dayIsHavingEvents = Boolean(EVENTS[date]);
+        const dayIsHavingEvents = Boolean(MARKED_EVENTS[date]);
         renderedDays.push(
           <View key={getTime(day)} style={styles.dayView}>
             <Text
@@ -71,12 +75,17 @@ const Month = ({ month }: { month: Date }) => {
   }
 
   return (
-    <View style={styles.monthView}>
-      <Text style={styles.monthTitle}>
-        {month.toLocaleString('default', { month: 'long' })}
-      </Text>
-      {renderedWeeks}
-    </View>
+    <TouchableWithoutFeedback
+      onPress={() =>
+        navigation.navigate('Month', { monthId: format(month, 'yyyy-MM-dd') })
+      }>
+      <View style={styles.monthView}>
+        <Text style={styles.monthTitle}>
+          {month.toLocaleString('default', { month: 'long' })}
+        </Text>
+        {renderedWeeks}
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 

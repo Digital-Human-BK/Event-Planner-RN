@@ -1,7 +1,7 @@
 import { Image, StyleSheet, View } from 'react-native';
-import { colors } from '../theme/colors';
+import { colors } from '../../theme/colors';
 
-import { width } from '../constants/ui';
+import { width } from '../../constants/ui';
 
 const Splash = () => {
   return (
@@ -9,7 +9,7 @@ const Splash = () => {
       <Image
         style={styles.logo}
         resizeMode="cover"
-        source={require('../assets/logo.png')}
+        source={require('../../assets/logo.png')}
       />
     </View>
   );
