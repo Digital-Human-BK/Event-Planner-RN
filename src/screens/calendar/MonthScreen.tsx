@@ -1,57 +1,18 @@
 import { useMemo, useState } from 'react';
 import { ScrollView } from 'react-native';
 import { RouteProp } from '@react-navigation/native';
-import { CalendarList, DateData, LocaleConfig } from 'react-native-calendars';
+import { CalendarList, DateData } from 'react-native-calendars';
 
 import { colors } from '../../theme/colors';
 import { theme } from '../../theme/calendar';
 import { today } from '../../constants/calendar';
 import { MARKED_EVENTS } from '../../utils/events';
+import LocaleConfig from '../../config/rn-calendars';
+import monthsScrollLimit from '../../utils/monthsScrollLimit';
 import { RootStackParamList } from '../../interfaces/navigation';
 
-import MonthHeader from '../../components/calendar/MonthHeader';
 import EventsList from '../../components/calendar/EventsList';
-
-LocaleConfig.locales.en = {
-  monthNames: [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ],
-  monthNamesShort: [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec',
-  ],
-  dayNames: [
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-  ],
-  dayNamesShort: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
-};
+import MonthHeader from '../../components/calendar/MonthHeader';
 
 LocaleConfig.defaultLocale = 'en';
 
@@ -66,13 +27,16 @@ const debounce = (func: (arg: DateData[]) => void, delay: number) => {
 };
 
 type MonthScreenProps = {
-  // navigation: StackNavigationProp<RootStackParamList, 'Home'>;
   route: RouteProp<RootStackParamList, 'Month'>;
 };
 
 const MonthScreen = ({ route }: MonthScreenProps) => {
   const initialDate = route.params.monthId;
   const [currentDate, setCurrentDate] = useState(initialDate);
+
+  const [pastScrollLimit, futureScrollLimit] = useMemo(() => {
+    return monthsScrollLimit(initialDate);
+  }, [initialDate]);
 
   const markedEvents = useMemo(() => {
     return {
@@ -107,8 +71,8 @@ const MonthScreen = ({ route }: MonthScreenProps) => {
         horizontal={true}
         pagingEnabled={true}
         calendarHeight={430}
-        pastScrollRange={24}
-        futureScrollRange={24}
+        pastScrollRange={pastScrollLimit}
+        futureScrollRange={futureScrollLimit}
         onVisibleMonthsChange={handleMonthChange}
         markedDates={markedEvents}
         renderHeader={date => (

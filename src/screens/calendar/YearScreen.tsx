@@ -4,6 +4,7 @@ import { View, FlatList, StyleSheet, ViewToken } from 'react-native';
 
 import { width } from '../../constants/ui';
 import { colors } from '../../theme/colors';
+import { YearProps } from '../../interfaces/calendar';
 import { currentYear, today } from '../../constants/calendar';
 import { StackNavigationProps } from '../../interfaces/navigation';
 
@@ -19,12 +20,9 @@ const YearScreen = () => {
   const navigation = useNavigation<StackNavigationProps['navigation']>();
   const [year, setYear] = useState(currentYear);
 
-  const renderItem = useCallback(
-    ({ item }: { item: { id: number | string; element: JSX.Element } }) => {
-      return item.element;
-    },
-    [],
-  );
+  const renderItem = useCallback(({ item }: { item: YearProps }) => {
+    return item.element;
+  }, []);
 
   const onViewChanged = useRef(({ changed }: ViewableItems) => {
     if (changed[0].isViewable) {
