@@ -111,6 +111,12 @@ android {
         }
     }
     signingConfigs {
+        release {
+        storeFile file('my-release-key.keystore')
+        storePassword 'calendarapp123'
+        keyAlias 'my-key-alias'
+        keyPassword 'calendarapp123'
+        }
         debug {
             storeFile file('debug.keystore')
             storePassword 'android'
